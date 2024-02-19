@@ -1,0 +1,6 @@
+@idata360_HostAddress = http://localhost:5046
+
+GET {{idata360_HostAddress}}/controller/
+Accept: application/json
+
+###
