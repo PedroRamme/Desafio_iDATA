@@ -7,7 +7,7 @@ namespace idata360
 {
     public class Database
     {
-        public void Get()
+        public List<Recruitment> Get()
         {
             string connectionString = "server=localhost;port=3306;userid=root;password=p123;database=idata360"; // informacoes necessarias para conectar ao banco de dados
 
@@ -30,10 +30,10 @@ namespace idata360
 
                     Tabela dados = new Tabela();        // instanciando a classe Tabela
                     
-                    foreach (DataColumn column in tabela.Columns) // buscando as colunas da tabela
-                    {
-                        dados.Headers.Add(column.ColumnName);     // adicionando os nomes das colunas a propriedade Headers
-                    }
+                    //foreach (DataColumn column in tabela.Columns) // buscando as colunas da tabela
+                    //{
+                     //   dados.Headers.Add(column.ColumnName);     // adicionando os nomes das colunas a propriedade Headers
+                    //}
                     foreach (DataRow row in tabela.Rows)          // buscando as linhas da tabela
                     {
                         Recruitment recruitment = new Recruitment // instanciando a classe recruitment e convertendo as propriedades
@@ -59,14 +59,15 @@ namespace idata360
                         };
                         dados.Values.Add(recruitment);           // adicionando os valores das linhas a propriedade Values
                     }
-                    
-                    
+
+                    return dados.Values;
                 }
                 catch (Exception ex)   // capta uma excecao                             
                 {
                     Console.WriteLine("Erro: " + ex.Message);    // escreve a excecao no console
 
                 }
+                return null;
             }
             
         }

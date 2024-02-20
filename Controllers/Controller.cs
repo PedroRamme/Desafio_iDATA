@@ -8,11 +8,11 @@ namespace idata360.Controllers
     public class Idata : ControllerBase
     {
         [HttpGet]
-        public List<string> Get()
+        public List<Recruitment> Get()
         {
             Database db = new Database();
-              
-            //return 
+
+            return db.Get();
              
         }
     }
