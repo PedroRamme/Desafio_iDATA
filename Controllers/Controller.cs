@@ -7,12 +7,12 @@ namespace idata360.Controllers
     [Route("[controller]")]
     public class Idata : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("recruitment")]            // endpoint
         public List<Recruitment> Get()
         {
-            Database db = new Database();
+            Database db = new Database();   // Instanciando a classe Database
 
-            return db.Get();
+            return db.GetData();            // Retornando o metodo com os valores das linhas da tabela
              
         }
     }

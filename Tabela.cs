@@ -2,19 +2,16 @@
 {
     public class Tabela
     {
-        public List<string> Headers { get; set; }
-
-        public List<Recruitment> Values{ get; set; }
+        public List<Recruitment> Values{ get; set; }    // Propriedade do tipo lista de objetos Recruitment 
 
         public Tabela()
         {
-            Headers = new List<string>();
-            Values = new List<Recruitment>();
+            Values = new List<Recruitment>();           // Inicializa a lista de Values como uma nova lista vazia de objetos Recruitment
         }
 
     }
 
-    public class Recruitment
+    public class Recruitment                            // Criando uma classe com propriedades que representam as colunas da tabela do banco de dados
     {
         public int ID { get; set; }
         public string Exportador { get; set; }
@@ -33,10 +30,7 @@
         public string CanalParametrizacao { get; set; }
         public string Origem { get; set; }
         public string Destino { get; set; }
-        public string LiberadoParaFaturamento { get; set; }
-
-
-
+        public DateTime LiberadoParaFaturamento { get; set; }
 
     }
 }
