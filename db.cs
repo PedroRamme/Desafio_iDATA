@@ -68,12 +68,46 @@ namespace idata360
         public bool InsertData(Recruitment recruitment)
         {
             using (MySqlConnection conexao = new MySqlConnection(connectionString))
-            {
-                string comandoSQL = @"INSERT INTO recruitment (Exportador, Importador, DataEmbarque, PrevisaoDeEmbarque, DataChegada, PrevisaoDeChegada, DI, Navio, Master, House, Fatura, FreteModo, Container, CanalParametrizacao, Origem, Destino, LiberadoParaFaturamento) VALUES (@Exportador, @Importador, @DataEmbarque, @PrevisaoDeEmbarque, @DataChegada, @PrevisaoDeChegada, @DI, @Navio, @Master, @House, @Fatura, @FreteModo, @Container, @CanalParametrizacao, @Origem, @Destino, @LiberadoParaFaturamento)";
+            {   
+                // Adicionando o comando de insercao de dados a tabela
+                string comandoSQL = @"INSERT INTO recruitment  (Exportador,             
+                                                                Importador, 
+                                                                DataEmbarque, 
+                                                                PrevisaoDeEmbarque, 
+                                                                DataChegada, 
+                                                                PrevisaoDeChegada, 
+                                                                DI, 
+                                                                Navio, 
+                                                                Master, 
+                                                                House, 
+                                                                Fatura, 
+                                                                FreteModo, 
+                                                                Container, 
+                                                                CanalParametrizacao, 
+                                                                Origem, 
+                                                                Destino, 
+                                                                LiberadoParaFaturamento) 
+                                                                VALUES (@Exportador, 
+                                                                @Importador, 
+                                                                @DataEmbarque, 
+                                                                @PrevisaoDeEmbarque, 
+                                                                @DataChegada,   
+                                                                @PrevisaoDeChegada, 
+                                                                @DI, 
+                                                                @Navio, 
+                                                                @Master,  
+                                                                @House, 
+                                                                @Fatura, 
+                                                                @FreteModo, 
+                                                                @Container, 
+                                                                @CanalParametrizacao, 
+                                                                @Origem, 
+                                                                @Destino, 
+                                                                @LiberadoParaFaturamento)";
 
                 MySqlCommand comando = new MySqlCommand(comandoSQL, conexao);
 
-                // Adiciona os parÃ¢metros ao comando SQL
+                // Adiciona os parametros ao comando SQL
                 comando.Parameters.AddWithValue("@Exportador", recruitment.Exportador);
                 comando.Parameters.AddWithValue("@Importador", recruitment.Importador);
                 comando.Parameters.AddWithValue("@DataEmbarque", recruitment.DataEmbarque);
@@ -95,9 +129,9 @@ namespace idata360
                 try
                 {
                     conexao.Open();
-                    int registrosAfetados = comando.ExecuteNonQuery();
+                    int registrosAfetados = comando.ExecuteNonQuery();           // Retorna as linhas afetadas pelo metodo
 
-                    return registrosAfetados > 0;
+                    return registrosAfetados > 0;                                // Retorna true caso registros forem afetados
                 }
                 catch (Exception ex)
                 {
