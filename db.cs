@@ -5,10 +5,10 @@ namespace idata360
 {
     public class Database
     {
+        string connectionString = "server=localhost;port=3306;userid=root;password=p123;database=idata360"; // Informacoes necessarias para conectar ao banco de dados
         public List<Recruitment> GetData()
         {
-            string connectionString = "server=localhost;port=3306;userid=root;password=p123;database=idata360"; // Informacoes necessarias para conectar ao banco de dados
-
+             
             using (MySqlConnection conexao = new MySqlConnection(connectionString)) // Repassa as informacoes de conexao 
             {
 
@@ -23,7 +23,6 @@ namespace idata360
                     using (MySqlDataReader reader = comando.ExecuteReader()) // Executa o comando SQL estabelecido 
                     {
                         tabela.Load(reader);
-
                     }
 
                     Tabela dados = new Tabela();        // Instanciando a classe Tabela
@@ -65,6 +64,47 @@ namespace idata360
                 return null;
             }
             
+        }
+        public bool InsertData(Recruitment recruitment)
+        {
+            using (MySqlConnection conexao = new MySqlConnection(connectionString))
+            {
+                string comandoSQL = @"INSERT INTO recruitment (Exportador, Importador, DataEmbarque, PrevisaoDeEmbarque, DataChegada, PrevisaoDeChegada, DI, Navio, Master, House, Fatura, FreteModo, Container, CanalParametrizacao, Origem, Destino, LiberadoParaFaturamento) VALUES (@Exportador, @Importador, @DataEmbarque, @PrevisaoDeEmbarque, @DataChegada, @PrevisaoDeChegada, @DI, @Navio, @Master, @House, @Fatura, @FreteModo, @Container, @CanalParametrizacao, @Origem, @Destino, @LiberadoParaFaturamento)";
+
+                MySqlCommand comando = new MySqlCommand(comandoSQL, conexao);
+
+                // Adiciona os parÃ¢metros ao comando SQL
+                comando.Parameters.AddWithValue("@Exportador", recruitment.Exportador);
+                comando.Parameters.AddWithValue("@Importador", recruitment.Importador);
+                comando.Parameters.AddWithValue("@DataEmbarque", recruitment.DataEmbarque);
+                comando.Parameters.AddWithValue("@PrevisaoDeEmbarque", recruitment.PrevisaoDeEmbarque);
+                comando.Parameters.AddWithValue("@DataChegada", recruitment.DataChegada);
+                comando.Parameters.AddWithValue("@PrevisaoDeChegada", recruitment.PrevisaoDeChegada);
+                comando.Parameters.AddWithValue("@DI", recruitment.DI);
+                comando.Parameters.AddWithValue("@Navio", recruitment.Navio);
+                comando.Parameters.AddWithValue("@Master", recruitment.Master);
+                comando.Parameters.AddWithValue("@House", recruitment.House);
+                comando.Parameters.AddWithValue("@Fatura", recruitment.Fatura);
+                comando.Parameters.AddWithValue("@FreteModo", recruitment.FreteModo);
+                comando.Parameters.AddWithValue("@Container", recruitment.Container);
+                comando.Parameters.AddWithValue("@CanalParametrizacao", recruitment.CanalParametrizacao);
+                comando.Parameters.AddWithValue("@Origem", recruitment.Origem);
+                comando.Parameters.AddWithValue("@Destino", recruitment.Destino);
+                comando.Parameters.AddWithValue("@LiberadoParaFaturamento", recruitment.LiberadoParaFaturamento);
+
+                try
+                {
+                    conexao.Open();
+                    int registrosAfetados = comando.ExecuteNonQuery();
+
+                    return registrosAfetados > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro ao inserir dados: " + ex.Message);
+                    return false;
+                }
+            }
         }
     }
 }
